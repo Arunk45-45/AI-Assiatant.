@@ -1,0 +1,172 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "334c956f-4c96-4b1c-9d56-5f1037e9a9b0",
+      "name": "When chat message received",
+      "webhookId": "78e8dc5a-65b5-4f6d-80e9-509a2e1b0f03"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        312,
+        0
+      ],
+      "id": "7f83fba4-0360-474d-a6d1-2bd2fbfef2a1",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        340,
+        220
+      ],
+      "id": "09475b1b-30f2-4035-a71e-26a715432718",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        460,
+        220
+      ],
+      "id": "76fe6c00-db5e-4b1c-9ebf-ccc5250bcecb",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "options": {
+          "hl": ""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        580,
+        220
+      ],
+      "id": "cb08afd6-c72c-4ae3-a6d8-cb3b787c4735",
+      "name": "SerpAPI1",
+      "notesInFlow": true,
+      "credentials": {
+        "serpApi": {
+          "id": "RyVhlDhNRYqSviK8",
+          "name": "SerpAPI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        220
+      ],
+      "id": "9347dd5c-c1a8-4a78-93c9-5059dce79ac6",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "4xIHtJIHLFJz19Or",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4549f1a1-a8e1-415c-bfea-4b837bb4e3ba",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "49f67d028f3fd9c7dac207a5ac54ceae1523e9445be09d5c5a9e9e3e1d789dbf"
+  },
+  "id": "6Nos29EVkoOuvJbW",
+  "tags": []
+}
